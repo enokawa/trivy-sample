@@ -17,7 +17,10 @@ jobs:
           name: Scan the local image with trivy (light)
           command: trivy --exit-code 1 --severity CRITICAL --no-progress trivy-sample:${CIRCLE_SHA1}
 workflows:
-  version: 2
-  release:
-    jobs:
-      - build
+   version: 2
+   nightly:
+     triggers:
+       - schedule:
+           cron: "0 * * * *"
+     jobs:
+       - build
